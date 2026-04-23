@@ -14,6 +14,7 @@
 pip install kafka-python
 ```
 
+
 # CLI 모드로 테스트
 ```
 # 접속
@@ -26,6 +27,7 @@ root@4527e52ba5f6:/# pwd
 root@4527e52ba5f6:/# cd /opt/kafka/bin
 
 # 토픽 생성
-
+# 파티션 1개로 관리, 복제본 1개로 관리되는 토픽 구성
+> kafka-topics.sh --create --topic spacex --bootstrap-server 127.0.0.1:9092 --partitions 1 --replication-factor 1
 
 ```
