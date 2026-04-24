@@ -2,7 +2,7 @@
 - kafka
 
 # repo
-- https://github.com/edu-kenshi/kafka-local.git
+- https://github.com/hyeongyu-data/kafka-local.git
 
 # 설치
 ```
@@ -125,3 +125,10 @@ VISUALIZE    :     OpenSearch (DB)      <---( Indexing & Search )---->  DASHBOAR
     ```
     docker compose restart
     ```
+
+- 커슈머 구동
+```
+    PS ...> docker exec -it kafka-local bash
+
+    > ./opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server 127.0.0.1:9092 --topic factory-json-topic --from-beginning
+```
