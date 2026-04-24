@@ -2,7 +2,7 @@
 - kafka
 
 # repo
-- https://github.com/hyeongyu-data/kafka-local.git
+- https://github.com/edu-kenshi/kafka-local.git
 
 # 설치
 ```
@@ -128,7 +128,51 @@ VISUALIZE    :     OpenSearch (DB)      <---( Indexing & Search )---->  DASHBOAR
 
 - 커슈머 구동
     ```
-    PS ...> docker exec -it kafka-local bash
+        PS ...> docker exec -it kafka-local bash
 
-    > ./opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server 127.0.0.1:9092 --topic factory-json-topic --from-beginning
+        # json 관련 토픽 커슈머
+        > ./opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server 127.0.0.1:9092 --topic factory-json-topic --from-beginning
+
+        # text 관련 토픽 커슈머
+        > ./opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server 127.0.0.1:9092 --topic factory-text-topic --from-beginning
     ```
+
+- 로그 발생 -> 카프카 컨슈머 수시 확인
+    ```
+        python log_gen.py
+    ```
+    
+- conf가 수정되면
+    - `docker compose restart` 반드시 수행
+
+- 전달 내용
+    - http로 전달해서 데이터가 늘어났음, 
+    - forward등 전달 방식은 다양함
+        - forward 시도, 24224 포트 사용
+```
+{
+    "event":{
+        "original":"[{\"date\":1777005819.42045,\"log\":\"\\\"[2026-04-24 13:43:38] ID=AI-FACTORY-001 |   TEMP:87.5 |   HUMI:42.1 |   STAT:RUNNING\\\"\"}]"},
+        "host":{"ip":"172.19.0.3"},
+        "user_agent":{"original":"Fluent-Bit"},
+        "date":1.77700581942045E9,
+        "url":{
+            "path":"/",
+            "domain":"logstash",
+            "port":5044
+        },
+        "http":{
+            "version":"HTTP/1.1",
+            "method":"POST",
+            "request":{
+                "body":{
+                    "bytes":"124"
+                },
+                "mime_type":"application/json"
+            }
+        },
+        "log":"\"[2026-04-24 13:43:38] ID=AI-FACTORY-001 |   TEMP:87.5 |   HUMI:42.1 |   STAT:RUNNING\"","@version":"1",
+        "@timestamp":"2026-04-24T04:43:40.412003029Z"
+    }
+}
+```
