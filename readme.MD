@@ -2,7 +2,7 @@
 - kafka
 
 # repo
-- https://github.com/edu-kenshi/kafka-local.git
+- https://github.com/hyeongyu-data/kafka-local.git
 
 # 설치
 ```
@@ -64,6 +64,9 @@ MESSAGING    :     Kafka / MSK (Broker) <-------------------------------------+-
                |          +----( Topic A: factory-json-topic ) <--- [Channel A Result]
                |          +----( Topic B: factory-text-topic ) <--- [Channel B Result]
                v                                                               |
+                                                                    kafka connect / ui
+                                                                               |
+                                                                               v
 VISUALIZE    :     OpenSearch (DB)      <---( Indexing & Search )---->  DASHBOARD (Kibana)
 ====================================================================================================
 ```
@@ -94,6 +97,10 @@ VISUALIZE    :     OpenSearch (DB)      <---( Indexing & Search )---->  DASHBOAR
                |          +----( 토픽 A: factory-json-topic ) <--- [채널 A 결과물]
                |          +----( 토픽 B: factory-text-topic ) <--- [채널 B 결과물]
                v                                                                  |
+                                                                    kafka connect / ui
+                                                                                  |
+                                                                                  v
+
 시각화/분석  :     OpenSearch (DB)      <---( 인덱싱 및 검색 )------>  대시보드 (Kibana)
 ====================================================================================================
 ```
@@ -176,3 +183,15 @@ VISUALIZE    :     OpenSearch (DB)      <---( Indexing & Search )---->  DASHBOAR
     }
 }
 ```
+
+# 로그 형태
+- 참고
+    - 최초 데이터 -> fluent-bit/logstash -> 데이터 형태가 노이즈 많음!!(프로토콜때문에 추가된 내용이 많음) -> 필터역할 필요함
+    - 필터 보정하는 내용 업데이트(추후)
+
+# kafka 대시보드
+- kafka ui
+- 메세지 흐름, connect를 통해 전달이 잘되는지 등등 모니터링
+
+# 로클 - 클라우드 연결
+- kafka connect
