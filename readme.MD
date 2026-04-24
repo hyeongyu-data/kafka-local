@@ -127,8 +127,8 @@ VISUALIZE    :     OpenSearch (DB)      <---( Indexing & Search )---->  DASHBOAR
     ```
 
 - 커슈머 구동
-```
+    ```
     PS ...> docker exec -it kafka-local bash
 
     > ./opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server 127.0.0.1:9092 --topic factory-json-topic --from-beginning
-```
+    ```
